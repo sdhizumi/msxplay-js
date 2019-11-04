@@ -1,14 +1,14 @@
 body {
   position: relative;
-  min-width: 720px;
+  min-width: 180px;
   overflow-x: hidden;
 }
 
 #editor {
   position: absolute;
   border: 1px solid #ccc;
-  left: 72px;
-  right: 72px;
+  left: 18px;
+  right: 18px;
   top: 132px;
   bottom: 100px;
 }
@@ -26,8 +26,8 @@ body {
   font-size: 10px;
   background-color: #444;
   color: white;
-  left: 72px;
-  right: 72px;
+  left: 18px;
+  right: 18px;
   position: absolute;
   height: 24px;
   line-height: 24px;
@@ -51,16 +51,16 @@ body {
 
 .actions {
   height: 48px;
-  margin: 32px 72px 0 72px;
+  margin: 32px 72px 0 18px;
   padding: 7px 12px;
   background-color: white;
   border: 1px solid #ccc;
   font-size: 12px;
-  color: #007aff;
+  color: #d88200;
 }
 
 .actions button {
-  color: #007aff;
+  color: #d88200;
   border-radius: 2px;
   padding: 0 8px;
   margin: 0px 8px 0px 0;
@@ -90,19 +90,19 @@ body {
 }
 
 .actions button:active {
-  background-color: #007af4;
+  background-color: #d88200;
   color: white;
 }
 
 #message {
   position: absolute;
-  right: 72px;
+  right: 18px;
   top: 88px;
   width: 320px;
   height: 220px;
   border: 1px solid #ccc;
   color: white;
-  background-color: #0070f0;
+  background-color: #d88200;
   border-radius: 2px;
   z-index: 100;
   overflow: hidden;
@@ -211,15 +211,15 @@ body {
 .dialog .button {
   text-align: center;
   font-size: 14px;
-  height: 36px;
-  line-height: 36px;
+  height: 18px;
+  line-height: 18px;
   border-radius: 2px;
   padding: 0 8px;
   margin-left: 8px;
   min-width: 64px;
   float: right;
   cursor: pointer;
-  color: #3a76ff;
+  color: #fdab03;
 }
 .dialog .button:hover {
   background-color: #ddd;

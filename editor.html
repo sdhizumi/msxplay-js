@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta content="text/html" charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>MSXplay - MML Editor</title>
 
@@ -11,41 +12,16 @@
     <meta property="og:title" content="MSXplay" />
     <meta property="og:site_name" content="MSXplay" />
     <meta property="og:description" content="MSX sound player on the web." />
-    <meta property="og:image" content="http://digital-sound-antiques.github.io/msxplay-js/img/ogp.png" />
-
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="MSXPlay" />
-    <meta name="twitter:description" content="MSX sound player on the web." />
-    <meta name="twitter:image" content="https://msxplay.com/img/ogp.png" />
+    <meta property="og:image" content="../img/ogp.png" />
 
     <script src="dist/msxplay-bundle.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="css/msxplay.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link href="css/lds-ripple.css" rel="stylesheet" type="text/css" />
     <link href="css/editor.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/theme-xcode.js"></script>
-
-    <script>
-      (function(i, s, o, g, r, a, m) {
-        i["GoogleAnalyticsObject"] = r;
-        (i[r] =
-          i[r] ||
-          function() {
-            (i[r].q = i[r].q || []).push(arguments);
-          }),
-          (i[r].l = 1 * new Date());
-        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m);
-      })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
-
-      ga("create", "UA-77432401-1", "auto");
-      ga("send", "pageview");
-    </script>
 
     <script src="js/lang-switcher.js"></script>
     <script src="js/query-parser.js"></script>
@@ -57,7 +33,6 @@
     <section class="page-header short">
       <nav class="root-nav">
         <ul>
-          <li><a href="index.html">Home</a></li>
           <li class="selected">MML Editor</li>
         </ul>
       </nav>
@@ -66,29 +41,23 @@
     <section class="actions">
       <input id="open-file" type="file" accept=".mml,.mus,.txt" style="display:none;" />
       <button onclick="document.getElementById('open-file').click();">
-        <p><i class="material-icons">folder</i> File</p>
+        <p><i class="material-icons">folder</i> </p>
       </button>
-      <button onclick="selectSample()">
-        <p><i class="material-icons">library_music</i> Sample</p>
-      </button>
-      <div style="display:inline-block;width:32px;"></div>
+      <div style="display:inline-block;width:6px;"></div>
       <button onclick="compile()">
-        <p><i class="material-icons">playlist_play</i> Compile</p>
+        <p><i class="material-icons">playlist_play</i> </p>
       </button>
-      <input id="autoplay" type="checkbox" checked /><label for="autoplay">&nbsp;play</label>
-      <div style="display:inline-block;width:12px;"></div>
+      <input id="autoplay" type="checkbox" checked /> <label for="autoplay">play</label>
+      <div style="display:inline-block;width:6px;"></div>
       <button onclick="download()">
-        <p><i class="material-icons">file_download</i> Export</p>
-      </button>
-      <button onclick="share()">
-        <p><i class="material-icons">share</i> Share<sup class="beta">BETA</sup></p>
+        <p><i class="material-icons">file_download</i> </p>
       </button>
     </section>
 
     <div id="editor"></div>
     <div id="editor-foot">
       <div style="float:left;">MML file can be dropped to the editor.</div>
-      <div style="float:right;">[<a target="_blank" href="http://www.gigamix.jp/mgsdrv/MGSC111.TXT">MML Help</a>]</div>
+      <div style="float:right;">[<a target="_blank" href="http://mus.msx.click/index.php?title=MGSDRV_MML_11_JP">MML Help</a>]</div>
     </div>
 
     <div id="message" class="minimized">
@@ -108,70 +77,6 @@
         <div class="button-area">
           <div class="button" data-value="yes">YES</div>
           <div class="button" data-value="no">NO</div>
-        </div>
-      </div>
-
-      <div id="loading" class="dialog" style="width:280px">
-        <div class="content">
-          <div style="text-align: center;padding-bottom:16px;">
-            <div class="lds-ripple">
-              <div></div>
-              <div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="select-sample" class="dialog" style="width:392px">
-        <div class="content">
-          <p lang="ja">編集したいMMLを選んでください。</p>
-          <p lang="en">Choose a sample MML file to open.</p>
-        </div>
-        <ul class="item-list">
-          <li data-value="demo/blank.mml">
-            <div class="title" lang="ja">新しいMML</div>
-            <div class="title" lang="en">New MML</div>
-            <div class="subtext" lang="ja">テンプレートから新規作成</div>
-            <div class="subtext" lang="en">a new MML template</div>
-          </li>
-          <li data-value="demo/grider.mml">
-            <div class="title">
-              Gun Rider
-              <div class="chips"><i>OPLL</i></div>
-            </div>
-            <div class="subtext">by J. arranged by Brezza</div>
-          </li>
-          <li data-value="demo/p52_arbl.mml">
-            <div class="title">
-              Arabiyaan (Long Version)
-              <div class="chips"><i>PSG</i><i>SCC</i></div>
-            </div>
-            <div class="subtext">by Wiz.</div>
-          </li>
-          <li data-value="demo/contrail.mml">
-            <div class="title">
-              [MSX Rock] Contrail
-              <div class="chips"><i>PSG</i><i>SCC</i><i>OPLL</i></div>
-            </div>
-            <div class="subtext">by DRM</div>
-          </li>
-          <li data-value="demo/es56.mml">
-            <div class="title">
-              Evil Swrod -Wilderness-
-              <div class="chips"><i>PSG</i><i>OPLL</i></div>
-            </div>
-            <div class="subtext">by DRM, arranged by Brezza</div>
-          </li>
-          <li data-value="demo/es59.mml">
-            <div class="title">
-              Evil Swrod -Fire master-
-              <div class="chips"><i>PSG</i><i>OPLL</i></div>
-            </div>
-            <div class="subtext">by DRM, arranged by Brezza</div>
-          </li>
-        </ul>
-        <div class="button-area">
-          <div class="button" data-value="cancel">Close</div>
         </div>
       </div>
 
@@ -202,54 +107,6 @@
         </div>
         <div class="button-area">
           <div class="button" data-value="ok">OK</div>
-        </div>
-      </div>
-
-      <div id="empty-error-on-share" class="dialog" style="width:280px">
-        <div class="content">
-          <p lang="ja">空のファイルはシェアできません。</p>
-          <p lang="en">Empty file is not allowed for share.</p>
-        </div>
-        <div class="button-area">
-          <div class="button" data-value="ok">OK</div>
-        </div>
-      </div>
-
-      <div id="compile-error-on-share" class="dialog" style="width:280px">
-        <div class="content">
-          <p lang="ja">シェアの前にコンパイルエラーを解決してください。</p>
-          <p lang="en">Resolve compile error first before sharing.</p>
-        </div>
-        <div class="button-area">
-          <div class="button" data-value="ok">OK</div>
-        </div>
-      </div>
-
-      <div id="wait-for-share-link" class="dialog" style="width:280px">
-        <div class="content">
-          <p lang="ja">シェアの準備中...</p>
-          <p lang="en">Sharing...</p>
-        </div>
-        <div style="text-align: center;padding-bottom:16px;">
-          <div class="lds-ripple">
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="share-link" class="dialog" style="width:336px">
-        <div class="content">
-          <p lang="ja">次のURLをコピーしてシェアしてください。</p>
-          <p lang="en">Copy and share the URL below.</p>
-          <div style="padding:16px 16px;">
-            <input type="text" onclick="this.select()" style="width:100%" readonly />
-            <div class="url"></div>
-          </div>
-        </div>
-        <div class="button-area">
-          <div class="button" lang="ja" data-value="close">閉じる</div>
-          <div class="button" lang="en" data-value="close">CLOSE</div>
         </div>
       </div>
 
@@ -306,29 +163,5 @@
         </div>
       </div>
     </div>
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-analytics.js"></script>
-
-    <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyA3yBgjdAOXUS8MiVvlUjMoPAsfEk_k9ZA",
-        authDomain: "msxplay-63a7a.firebaseapp.com",
-        databaseURL: "https://msxplay-63a7a.firebaseio.com",
-        projectId: "msxplay-63a7a",
-        storageBucket: "msxplay-63a7a.appspot.com",
-        messagingSenderId: "720072373890",
-        appId: "1:720072373890:web:d4f28f5c3c3a27b8eea69b",
-        measurementId: "G-CV2H302X7T"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      firebase.analytics();
-    </script>
   </body>
 </html>
